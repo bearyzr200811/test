@@ -38,5 +38,7 @@ articles_dirname = sys.argv[i+2]
 gloves = load_glove(glove_filename)
 articles_list = load_articles(articles_dirname, gloves)
 
+print("running...")
+
 
 
