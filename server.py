@@ -20,9 +20,7 @@ def article(topic,filename):
             content = a[2]
             doc = a
             break
-
     results = recommended(doc, articles_list, 5)
-    
     return render_template('article.html', title=title, content=content, results=results)
   
 @app.route("/")
@@ -31,14 +29,13 @@ def articles():
     return render_template('articles.html', articles=articles_list)
 
 # initialization
-i = sys.argv.index('server:app')
-glove_filename = sys.argv[i+1]
-articles_dirname = sys.argv[i+2]
+#i = sys.argv.index('server:app')
+#glove_filename = sys.argv[i+1]
+#articles_dirname = sys.argv[i+2]
 
-gloves = load_glove(glove_filename)
-articles_list = load_articles(articles_dirname, gloves)
+gloves = load_glove('glove.6B.300d.txt')
+articles_list = load_articles('bbc', gloves)
 
-print("running...")
-
+app.run()
 
 
