@@ -7,7 +7,7 @@ from doc2vec import *
 import sys
 
 app = Flask(__name__)
-
+'''
 @app.route("/article/<topic>/<filename>")
 def article(topic,filename):
     """
@@ -20,22 +20,24 @@ def article(topic,filename):
             content = a[2]
             doc = a
             break
+
     results = recommended(doc, articles_list, 5)
+    
     return render_template('article.html', title=title, content=content, results=results)
-  
+ ''' 
 @app.route("/")
 def articles():
     """Show a list of article titles"""
-    return render_template('articles.html', articles=articles_list)
-
+    #return render_template('articles.html', articles=articles_list)
+    return "hello" 
 # initialization
-#i = sys.argv.index('server:app')
-#glove_filename = sys.argv[i+1]
-#articles_dirname = sys.argv[i+2]
+i = sys.argv.index('server:app')
+glove_filename = sys.argv[i+1]
+articles_dirname = sys.argv[i+2]
 
-gloves = load_glove('glove.6B.300d.txt')
-articles_list = load_articles('bbc', gloves)
+gloves = load_glove(glove_filename)
+articles_list = load_articles(articles_dirname, gloves)
 
-app.run()
+
 
 
